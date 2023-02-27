@@ -3,7 +3,7 @@ const pastEvents =document.getElementById('past-events');
 function createPastEvents(arrayData){
     let card = '';
     for(const event of arrayData){
-        if(parent(event.date) < parseInt(currentDate)){
+        if(parseInt(event.date) < parseInt(currentDate)){
             card += 
             `
             <div class="col">
@@ -12,8 +12,7 @@ function createPastEvents(arrayData){
                     <div class="card-body">
                     <h5 class="card-title">${event.name}</h5>
                     <p class="card-text">${event.description}</p>
-                    <a href="details.html" class="btn btn-primary">Go somewhere</a>
-                </div>
+                    <a href="details.html" class="btn btn-primary">Get Details</a>
                 </div>
             </div>
             <div class="card-footer pt-3 pb-3 d-flex justify-content-around align-items-xl-baseline">
@@ -24,7 +23,7 @@ function createPastEvents(arrayData){
                     </span>
                     ${event.price}
                 </p>
-                <a href="details.html">Details</a>
+                
             </div>
             `
         }
