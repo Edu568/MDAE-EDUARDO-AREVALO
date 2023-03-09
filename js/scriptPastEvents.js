@@ -43,7 +43,7 @@ const createCard = (arrayData) => {
     });
 
     pastContainer.innerHTML = pastCardEvents 
-    console.log(upcomingContainer)
+    console.log(pastContainer)
 }
 
 createCard(events)
