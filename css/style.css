@@ -77,6 +77,12 @@ label {
   padding-left: 10px;
 }
 
+#categoryContainer{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
 .cardContainer {
   display: flex;
   flex-direction: row;
