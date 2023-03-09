@@ -1,3 +1,8 @@
+const currentDateContainer = document.getElementById('current-date-p');
+const currentDateElement = new Date(currentDate + "T00:00:00.000-05:00").toDateString();
+currentDateContainer.innerHTML = currentDateElement;
+
+
 const cardsUpComingEvents = document.getElementById('upcoming-events');
 
 function createUpComingEvents(arrayData){
