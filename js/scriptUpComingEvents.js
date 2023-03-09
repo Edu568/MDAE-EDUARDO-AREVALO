@@ -3,51 +3,53 @@ const currentDateElement = new Date(currentDate + "T00:00:00.000-05:00").toDateS
 currentDateContainer.innerHTML = currentDateElement;
 
 
-const cardsUpComingEvents = document.getElementById('upcoming-events');
 
-const filterEventsUP = (arrayData) => {
-    let upcomingEvents = arrayData.filter(event => event.date >= currentDate);
-    return upcomingEvents
-}
 
-const createCardUpComingEvents = (arrayData) => {
-    let cards = "";
+const upcomingContainer = document.getElementById('upcoming-events');
+
+const createCard = (arrayData) => {
+
+    let cardsUpComingEvents = '';
+    
 
     arrayData.forEach((event) => {
-        if(event.date >= currentDate)
-        cards+=
-        `<div class="col">
-                <div class="card" style="width: 18rem;">
-                    <img src="${event.image}" class="card-img-top" alt=${event.name}>
-                    <div class="card-body">
-                    <p class="card-text fs-6 p-0 mb-1 text-white-50">${event.category}</p>
-                        <h5 class="card-title">${event.name}</h5>
-                        <p class="card-text">${event.description}</p>
-                        <a href="details.html?id=${event._id}" class="btn btn-primary">Get Details</a>
-                    </div>
+        if(event.date >= currentDate){
+            cardsUpComingEvents += 
+            `<div class="col">
+            <div class="card" style="width: 18rem;">
+                <img src="${event.image}" class="card-img-top alt=${event.name}>
+                <div class="card-header bg-dark text-danger bg-gradient">
+                    Past Event
                 </div>
-                <div class="card-footer pt-3 pb-3 d-flex justify-content-around align-items-xl-baseline">
-                    <p class="mb-0 d-flex flex-row flex-md-column flex-xl-row">
-                        <span>
-                            <i class="bi bi-tag"></i>
-                            price:&nbsp;
-                        </span>
-                        $${event.price}
-                    </p>
-                
-                </div>
+                <div class="card-body">
+                <p class="card-text fs-6 p-0 mb-1 text-white-50">${event.category}</p>
+                <h5 class="card-title">${event.name}</h5>
+                <p class="card-text">${event.description}</p>
+                <a href="details.html?id=${event._id}" class ="btn btn-primary">Get Details</a>
+            </div>
+            <div class="card-footer pt-3 pb-3 d-flex justify-content-around align-items-xl-baseline">
+                <p class="mb-0 d-flex flex-row flex-md-column flex-xl-row">
+                    <span>
+                        <i class="bi bi-tag"></i>
+                        price:&nbsp;
+                    </span>
+                    $${event.price}
+                </p>
+            
+            </div>
         </div>
-        `
+            `
+        }
     });
 
-    cardsUpComingEvents.innerHTML = cards
+    upcomingContainer.innerHTML = cardsUpComingEvents 
+    console.log(upcomingContainer)
 }
 
-const arrayUpComingEvents = filterEventsUpcoming(events)
-createCardUpComingEvents(events)
-
+createCard(events)
 
 //categorias
+
 const categoryContainer = document.getElementById('categoryContainer');
 
 const filterCategories = (arrayData) => {
@@ -80,18 +82,15 @@ const createCategories = (arrayCat) => {
 const arrCategories = filterCategories(events);
 createCategories(arrCategories);
 
-let ultimateArrUE = arrayUpComingEvents
-
-const filterEventsByCategory = ((arrayCategories, arrayEvents = arrayUpComingEvents ) => {
+const arrCategorySelected = (() => {
     searchInput.value = ''
-    let filterEvents = []
+    let selection = []
     
-    arrayCategories.forEach(category => {
-        arrayEvents.forEach(event => {
-            if(event.category == category){
-                filteredEvents.push(event)
-            }
-        })
+    arrCategories.forEach(category => {
+        let selector = document.getElementById(category);
+        if (selector.checked) {
+            selection.push(category)
+        }
     })
 
     if (selection.length != 0) {
@@ -161,8 +160,7 @@ checkBoxArr.forEach(check => {
     }
 } )
 
-// BUscador
-
+//buscador
 let searchSave = '';
 
 const searchInput = document.getElementById('mySearch')
@@ -194,6 +192,10 @@ searchInput.addEventListener("keyup", () => {
         createCard(crossFilter)
     }
 
-
-
-
+    // if (Object.keys(filteredCards).length === 0) {
+    //     noResultsMessage.innerHTML = `
+    //     <h1>Page not found </h1>`
+    // } else {
+    //     noResultsMessage.innerHTML = '';
+    // }
+})

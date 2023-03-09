@@ -13,6 +13,11 @@
   </head>
   <body>
     <header>
+      <div class="current-date-container m-0 bg-gradient text-body-secondary">
+        <p id="current-date-p" class="m-0">
+            <!-- CURRENT DATE  -->
+        </p>
+      </div>
       <nav>
         <div class="nav-container">
           <img src="./images/Logo Amazing Events.png" alt="Logo" class="logo" />
@@ -34,21 +39,14 @@
     </header>
     <main>
       <form class="form-container">
-        <div class="col-1">
-          <label for="">Category</label>
-          <input type="checkbox" name="category" id="category" />
-          <label for="">Category</label>
-          <input type="checkbox" name="category" id="category" />
-          <label for="">Category</label>
-          <input type="checkbox" name="category" id="category" />
-          <label for="">Category</label>
-          <input type="checkbox" name="category" id="category" />
-          <label for="">Category</label>
-          <input type="checkbox" name="category" id="category" />
+        <div class="col-1" id="categoryContainer">
+          
         </div>
         <div class="col-2">
-            <input type="search" placeholder="Buscar:">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="search" placeholder="Buscar:" id="mySearch">
+            <button type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
         </div>
       </form>
       <div class="cardContainer cards-container text-center" >
