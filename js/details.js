@@ -23,7 +23,7 @@ const cardContent = document.getElementById('index-container')
                 <div class="card-body">
                 <h5 class="card-title">${eventDetail.name}</h5>
                 <p class="card-text">${eventDetail.description}</p>
-                <a href="details.html?id=${eventDetail._id}" class="btn btn-primary">Get Details</a>
+                <a href="details.html?id=${eventDetail._id}" class="btn btn-primary">Compra</a>
         </div>
         <div class="card-footer pt-3 pb-3 d-flex justify-content-around align-items-xl-baseline">
                 <p class="mb-0 d-flex flex-row flex-md-column flex-xl-row">

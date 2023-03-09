@@ -127,26 +127,64 @@ const arrCategorySelected = (() => {
 })
 
 const checkbox = document.querySelectorAll(".check")
-console.log(checkbox)
+
 
 const checkBoxArr = Array.from(checkbox)
-console.log(checkBoxArr)
+
+let filterSavedByCategory = []
 
 let categoriesFilter = []
 checkBoxArr.forEach(check => {
     check.addEventListener("change", () => {
-    
+
+        filterSavedByCategory = []
+        
         if(check.checked){
             categoriesFilter.push(check.value)
-            console.log(categoriesFilter)
+            
         } else{
-            console.log("Esta deschequeado")
+            let index = categoriesFilter.indexOf(check.value)
+            if(index !== -1){
+                categoriesFilter.splice(index, 1)
+            }
+
         }
-        console.log(check.value)
+        
+        filterbyCategory(events, categoriesFilter)
+
+        let crossFilter = []
+
+        if(searchSave == ''){
+            createCard(filterSavedByCategory)
+        }else {
+
+            for(let i = 0; i < filterSavedByCategory.length; i++){
+                if(filterSavedByCategory[i].name.toLowerCase().includes(searchSave.toLocaleLowerCase())){
+                    crossFilter.push(filterSavedByCategory[i])
+                }
+            } 
+            createCard(crossFilter)
+        }   
+        console.log(crossFilter)
     })
+
+    
+
+    function filterbyCategory(eventos, checkedCategories){
+        for(let i = 0; i < eventos.length;i++){
+             for(let j = 0; j < checkedCategories.length; j++){
+                 if(eventos[i].category==checkedCategories[j]){
+                     filterSavedByCategory.push(eventos[i])
+                 }
+                 
+             }
+         }
+         console.log(filterSavedByCategory)
+    }
 } )
 
 //buscador
+let searchSave = '';
 
 const searchInput = document.getElementById('mySearch')
 const noResultsMessage = document.getElementById('no-result-message')
@@ -154,12 +192,33 @@ const noResultsMessage = document.getElementById('no-result-message')
 searchInput.addEventListener("keyup", () => {
     let filteredCards = events.filter((event) => event.name.toLowerCase().includes(searchInput.value.trim().toLowerCase()))
 
-    createCard(filteredCards)
+    searchSave = searchInput.value;
+    
 
-    if (Object.keys(filteredCards).length === 0) {
-        noResultsMessage.innerHTML = `
-        <h1>Page not found </h1>`
-    } else {
-        noResultsMessage.innerHTML = '';
+    // 
+    if(filterSavedByCategory.length == 0){
+        createCard(filteredCards)
+    } else{
+
+        let crossFilter = []
+
+
+        for(let i = 0; i < categoriesFilter.length;i++ ){
+            for(let j = 0; j < filteredCards.length; j++){
+                if(categoriesFilter[i] == filteredCards[j].category){
+                    crossFilter.push(filteredCards[j])
+                }
+            }
+        }
+
+        console.log(crossFilter)
+        createCard(crossFilter)
     }
+
+    // if (Object.keys(filteredCards).length === 0) {
+    //     noResultsMessage.innerHTML = `
+    //     <h1>Page not found </h1>`
+    // } else {
+    //     noResultsMessage.innerHTML = '';
+    // }
 })
